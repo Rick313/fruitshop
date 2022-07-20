@@ -1,0 +1,41 @@
+@import "src/styles/variables";
+
+@mixin background-dark {
+  background-color: $dark;
+  color: $light;
+}
+
+@mixin background-light {
+  background-color: $light;
+  color: $dark;
+}
+
+@mixin block-spacing {
+  padding: $space-LR $space-TB;
+}
+
+@mixin block {
+  box-sizing: border-box;
+  border-radius: $border-radius;
+}
+
+@mixin grid {
+  @media screen and (min-width: $small-screen) {
+    & {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-LR;
+}
+
+@mixin grid-columns($start: 1, $end: 1) {
+  grid-column-end: $end;
+  grid-column-start: $start;
+}
+
+@mixin container {
+  display: block;
+  box-sizing: border-box;
+}

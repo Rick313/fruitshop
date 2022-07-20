@@ -1,0 +1,26 @@
+$red: #f8785c;
+$primary: #feca57;
+$gradient-primary: linear-gradient(
+  30deg,
+  rgba(34, 47, 62, 1) 0%,
+  rgba(254, 202, 87, 1) 100%
+);
+
+$accent: #1dd1a1;
+$gradient-accent: linear-gradient(
+  30deg,
+  rgba(34, 47, 62, 1) 0%,
+  rgba(29, 209, 161, 1) 100%
+);
+
+$small-screen: 643px;
+
+$shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+
+$dark: #222f3e;
+$light: #fefefe;
+
+$border-radius: 4px;
+
+$space-TB: 1rem;
+$space-LR: 0.8rem;

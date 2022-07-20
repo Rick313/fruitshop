@@ -1,0 +1,19 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+:host {
+  @include container;
+  height: inherit;
+}
+
+.top-bar {
+  @include container;
+  @include background-dark;
+  @include block-spacing;
+}
+
+main {
+  @include container;
+  @include background-light;
+  overflow: auto;
+}

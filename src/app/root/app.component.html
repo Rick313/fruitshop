@@ -1,0 +1,13 @@
+<div #topbar class="top-bar"></div>
+<main #main>
+  <router-outlet></router-outlet>
+</main>
+
+<div class="toasts" *ngIf="messages$ | async as messages">
+  <ng-container *ngFor="let message of messages">
+    <div class="toast" *ngIf="!message.read" (click)="this.notification.read(message)">
+      <span class="title">{{ message.title }}</span>
+      <span class="content">{{ message.content }}</span>
+    </div>
+  </ng-container>
+</div>

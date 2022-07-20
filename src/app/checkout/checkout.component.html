@@ -1,0 +1,135 @@
+<div class="order">
+  <h3>Ta commande</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>article</th>
+        <th>quantitée</th>
+        <th>prix (€)</th>
+        <th>total (€)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let article of backpack.articles">
+        <td>
+          <img [src]="article.picture" [alt]="article.name" />
+          <span>{{ article.name }}</span>
+        </td>
+        <td>{{ article.quantity }}</td>
+        <td>{{ backpack.getUnitPrice(article) }}</td>
+        <td>{{ article.price }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3"></td>
+        <td>{{ backpack.total }}</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<hr />
+
+<div class="delivery">
+  <ng-container *ngIf="!deliveryValidate">
+    <h3>Où doit on t'apporter ta commande ?</h3>
+    <span>*Nous livrons qu'en france</span>
+    <form [formGroup]="delivery" (submit)="submitDevlivery()">
+      <div class="from-control">
+        <label>Ville<span class="required">*</span></label>
+        <span *ngIf="showError(delivery.controls.city)" class="message-error"
+          >Il y a une erreur</span
+        >
+        <input formControlName="city" type="text" name="city" required />
+      </div>
+
+      <div class="inline-group">
+        <div class="from-control">
+          <label>Code postal<span class="required">*</span></label>
+          <span *ngIf="showError(delivery.controls.zipcode)" class="message-error"
+            >Il y a une erreur</span
+          >
+          <input formControlName="zipcode" type="text" name="zipcode" required />
+        </div>
+
+        <div class="from-control">
+          <label>Rue<span class="required">*</span></label>
+          <span *ngIf="showError(delivery.controls.street)" class="message-error"
+            >Il y a une erreur</span
+          >
+          <input formControlName="street" type="text" name="street" required />
+        </div>
+      </div>
+
+      <div class="from-control">
+        <label>Email<span class="required">*</span></label>
+        <span *ngIf="showError(delivery.controls.email)" class="message-error"
+          >Il y a une erreur</span
+        >
+        <input formControlName="email" type="email" name="email" required />
+      </div>
+      <div class="from-control">
+        <label>Téléphone<span class="required">*</span></label>
+        <span *ngIf="showError(delivery.controls.phone)" class="message-error"
+          >Il y a une erreur</span
+        >
+        <input formControlName="phone" type="tel" name="phone" required />
+      </div>
+
+      <button type="submit" [disabled]="delivery.invalid">Valider</button>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="deliveryValidate">
+    <h3>Vous recevrez votre commande ici :</h3>
+    <div>
+      <div>{{ delivery.value.zipcode }} {{ delivery.value.city }}</div>
+      <div>{{ delivery.value.street }}</div>
+      <div>France</div>
+      <br />
+      <div>Email : {{ delivery.value.email }}</div>
+      <div>Phone : {{ delivery.value.phone }}</div>
+    </div>
+  </ng-container>
+</div>
+
+<hr />
+
+<div class="credit-card">
+  <h3>Paiement</h3>
+  <form [formGroup]="creditcard" (submit)="submitCreditCard()">
+    <div class="credit-card-infos inline-group">
+      <div class="from-control">
+        <label>Numéros</label>
+        <input formControlName="numbers" type="text" name="text" required />
+      </div>
+
+      <div class="from-control">
+        <label>Code</label>
+        <input formControlName="code" type="text" name="code" required />
+      </div>
+    </div>
+
+    <div class="credit-card-expire" formGroupName="expire">
+      <label>Expire</label>
+      <div class="inline-group">
+        <div class="from-control">
+          <select name="year" formControlName="month" required>
+            <option *ngFor="let month of months">{{ month }}</option>
+          </select>
+        </div>
+
+        <div class="from-control">
+          <select name="year" formControlName="year" required>
+            <option *ngFor="let year of years">{{ year }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="creditcard.invalid || !deliveryValidate">
+      Commander
+    </button>
+  </form>
+</div>

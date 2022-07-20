@@ -1,0 +1,73 @@
+<ng-container *ngIf="products$ | async as products">
+  <div *ngIf="products.status === 'load'" class="load-screen">
+    <img src="/assets/satellite.svg" alt="loading..." />
+    <span>Nous récupérons les données du serveur...</span>
+  </div>
+
+  <ng-container *ngIf="products.status === 'success'">
+    <div class="product-deck">
+      <div class="product-card" *ngFor="let product of products?.data">
+        <div class="product-card-left">
+          <img [src]="product.picture" [alt]="product.name" />
+          <span>{{ product.name }}</span>
+        </div>
+        <div class="product-card-right">
+          <span>Description :</span>
+          <!-- <p>{{ product.description }}</p> -->
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quis optio minus
+            nesciunt quidem minima vel autem harum illum libero eveniet eaque quas,
+            voluptatum sed tempora voluptates, odio iure aliquam?
+          </p>
+          <div>
+            <button
+              class="btn-primary"
+              type="button"
+              (click)="onClickAddIntoMyBag($event, product)"
+            >
+              Ajouter
+            </button>
+            <span>{{ product.price }} €</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<div class="backpack">
+  <div #topbar class="backpack-bar" (click)="onClickTopBar($event)">
+    <span>Mon Sac</span>
+    <span #itemchip *ngIf="items !== '0'">{{ items }}</span>
+  </div>
+  <div class="backpack-content">
+    <div class="backpack-deck">
+      <div class="backpack-card" *ngFor="let article of backpack.articles">
+        <div>
+          <img [src]="article.picture" [alt]="article.name" />
+          <div>
+            <div>{{ article.name }} x {{ article.quantity }}</div>
+            <div>
+              <b>Total : </b><span>{{ article.price }} €</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="button" (click)="onClickMinusQuantity($event, article)">-</button>
+          <button type="button" (click)="onClickPlusQuantity($event, article)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="backpack-actions">
+      <img src="/assets/shopping-cart.svg" />
+      <span><b>Total : </b>{{ backpack.total }} €</span>
+      <button
+        type="button"
+        [disabled]="backpack.articles.length <= 0"
+        (click)="onClickCheckout($event)"
+      >
+        Passer en caise
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,199 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+:host {
+  display: block;
+  max-width: 823px;
+  margin: 0 auto;
+}
+
+:host > .load-screen {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 80px auto;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+  img {
+    height: 270px;
+    width: 270px;
+  }
+  span {
+    font-size: 0.8rem;
+  }
+}
+
+:host > .product-deck {
+  @include grid;
+  @include block-spacing;
+  .product-card {
+    @include grid-columns(1, 5);
+    @include block-spacing;
+    @media screen and (min-width: $small-screen) {
+      @include grid-columns(1, 7);
+    }
+    display: flex;
+    flex-flow: row nowrap;
+    gap: $space-LR;
+    &:hover {
+      box-shadow: $shadow;
+    }
+  }
+}
+
+:host > .product-deck .product-card-right {
+  span:nth-of-type(1) {
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  span:nth-of-type(1) ~ p {
+    font-size: 0.6rem;
+  }
+  span:nth-of-type(1) ~ p ~ div {
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    align-items: center;
+    gap: 0.6rem;
+    & span {
+      font-weight: 400;
+    }
+  }
+}
+
+:host > .product-deck .product-card-left {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: $space-LR;
+  align-items: center;
+  img {
+    @include block-spacing;
+    border-radius: $border-radius;
+    height: 96px;
+    width: 96px;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  span {
+    font-weight: bold;
+  }
+}
+
+:host > .backpack {
+  @include container;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background-color: $light;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(100%);
+  & > .backpack-bar {
+    @include background-dark;
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 0.6rem;
+    user-select: none;
+    cursor: pointer;
+    & > span:nth-of-type(2) {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: -21px;
+      right: 1.2rem;
+      border-radius: 50%;
+      background-color: $accent;
+      height: 42px;
+      width: 42px;
+    }
+  }
+}
+
+:host > .backpack > .backpack-content {
+  @include container;
+  @include block-spacing;
+  display: flex;
+  height: 244px;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  .backpack-deck,
+  .backpack-actions {
+    @include container;
+    @include block-spacing;
+  }
+
+  .backpack-deck {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 2rem;
+    overflow: auto;
+    & > .backpack-card {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: $space-LR;
+      & > div:nth-of-type(1) {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: $space-LR;
+        justify-content: center;
+        img {
+          height: 96px;
+          width: 96px;
+        }
+        & > div,
+        & > div span {
+          font-size: 0.7rem;
+        }
+      }
+      & > div:nth-of-type(2) {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          border: 1px solid lightgray;
+          background-color: $light;
+          padding: 0.4rem;
+          width: 42px;
+          height: 42px;
+          font-size: 1rem;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .backpack-actions {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      height: 37px;
+      width: 37px;
+      right: 45px;
+      top: 5px;
+      border-radius: 50%;
+      background-color: rgba($color: $primary, $alpha: 0.4);
+      z-index: -1;
+    }
+    img {
+      height: 96px;
+      width: 96px;
+      object-fit: cover;
+    }
+    span {
+      font-size: 0.7rem;
+    }
+  }
+}

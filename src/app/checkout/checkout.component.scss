@@ -1,0 +1,59 @@
+@import "src/styles/mixins";
+
+:host {
+  @include container;
+  max-width: 823px;
+  overflow: auto;
+  margin: 0 auto;
+
+  h3 {
+    margin-bottom: 0.6rem;
+  }
+
+  & > .order,
+  & > .delivery,
+  & > .credit-card {
+    @include container;
+    @include block-spacing;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  & > .delivery {
+    & > span {
+      margin-bottom: 0.6rem;
+    }
+    & > span {
+      font-size: 0.6rem;
+    }
+    form {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 0.8rem;
+      & .inline-group {
+        .from-control:first-child {
+          flex: 1 0 0;
+        }
+        .from-control:not(:first-child) {
+          flex: 1 1 100%;
+        }
+      }
+    }
+  }
+
+  & > .credit-card {
+    form {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 0.8rem;
+    }
+    label {
+      font-size: 0.8rem;
+    }
+    .credit-card-expire {
+      label {
+        margin-bottom: 0.6rem;
+      }
+    }
+  }
+}
